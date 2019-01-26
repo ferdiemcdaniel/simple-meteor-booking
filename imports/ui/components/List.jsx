@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ListComponent = (list) => (
-    <ul>{list}</ul>
+const ListComponent = (props) => (
+    <ul>{props.children}</ul>
 );
 
 export default ListComponent;

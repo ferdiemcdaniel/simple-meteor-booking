@@ -3,7 +3,7 @@ import TextInput from './TextInput';
 
 const AddForm = (props) => (
     <form onSubmit={props.handleSubmit}>
-        <TextInput {...props.nameInput} />
+        <TextInput {...props.fields[0]} />
         <button type="submit">Add</button>
     </form>
 );
