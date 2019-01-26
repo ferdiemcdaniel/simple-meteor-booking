@@ -19,7 +19,10 @@ class GuestList extends Component{
         super(props);
         this.state = {
             form: {
-                name: ""
+                name: '',
+                age: '',
+                gender: 0,
+                nationality: ''
             }
         }
     }
@@ -27,19 +30,21 @@ class GuestList extends Component{
     addGuest = (e) => {
        e.preventDefault();
        let {form} = this.state;
-       const newGuest = {
-                name: form.name,
-                gender: "Male",
-                age: 18,
-                nationality: "Cebuano"
-        }; 
-       form = {name: ""};
-       this.setState({form}, () => {
+       const newGuest = form;
+       this.setState({form: {
+            name: '',
+            age: '',
+            gender: 0,
+            nationality: ''
+        }}, () => {
         Guests.insert(newGuest);
        });
     }
 
     handleChangeName = (e) => this.setState({form: {...this.state.form, name: e.target.value}});
+    handleChangeGender = (e) => this.setState({form: {...this.state.form, gender: e.target.value}});
+    handleChangeAge = (e) => this.setState({form: {...this.state.form, age: parseInt(e.target.value)}});
+    handleChangeNatl = (e) => this.setState({form: {...this.state.form, nationality: e.target.value}});
     
     render(){
         const {form} = this.state;
@@ -54,7 +59,10 @@ class GuestList extends Component{
                         handleSubmit={this.addGuest}
                         submitLabel={"Book"}
                         fields={[
-                            {type: 'text', placeholder: "Name", value: form.name, handleChange: this.handleChangeName}
+                            {type: 'text', placeholder: "Name", value: form.name, handleChange: this.handleChangeName, style:{margin: '5px'}},
+                            {type: 'dropdown', placeholder: "Gender", value: 0, options:['Male', 'Female'], handleChange: this.handleChangeGender, style:{margin: '5px'}},
+                            {type: 'text', placeholder: "Age", value: form.age, handleChange: this.handleChangeAge, style:{margin: '5px'}},
+                            {type: 'text', placeholder: "Nationality", value: form.nationality, handleChange: this.handleChangeNatl, style:{margin: '5px'}},
                         ]}
                 />
                 </div>
